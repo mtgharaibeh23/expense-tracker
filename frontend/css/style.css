@@ -1,0 +1,307 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --ink: #142532;
+  --muted: #617280;
+  --green: #087f70;
+  --green-dark: #075d56;
+  --gold: #d79a3b;
+  --border: #e2ebe9;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Cairo", "Segoe UI", Tahoma, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 5%, #dff4ed 0, transparent 28%),
+    radial-gradient(circle at 90% 20%, #fff2da 0, transparent 24%),
+    #f5f8f7 !important;
+}
+
+.navbar {
+  min-height: 74px;
+  background: linear-gradient(110deg, #112432, #075d56) !important;
+  box-shadow: 0 8px 30px rgba(13, 42, 46, 0.18);
+}
+
+.navbar .container {
+  max-width: 1160px;
+}
+
+.navbar-brand {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+main.container {
+  max-width: 1160px;
+  padding-top: 2rem !important;
+}
+
+/* الرسالة الشخصية أعلى الصفحة */
+main.container > .alert-warning {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+  border: 0;
+  border-radius: 22px;
+  color: white;
+  background:
+    radial-gradient(circle at 8% 10%, rgba(255, 224, 157, 0.34), transparent 30%),
+    radial-gradient(circle at 95% 85%, rgba(255, 255, 255, 0.13), transparent 26%),
+    linear-gradient(115deg, #0d615b, #103745 75%);
+  box-shadow: 0 18px 36px rgba(8, 80, 75, 0.18);
+  font-size: clamp(1.15rem, 2.5vw, 1.8rem);
+  line-height: 1.7;
+}
+
+main.container > .alert-warning::after {
+  content: "";
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  left: -65px;
+  bottom: -125px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 28px rgba(29, 57, 58, 0.06) !important;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.summary-grid .card {
+  position: relative;
+  overflow: hidden;
+  min-height: 145px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.summary-grid .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(29, 57, 58, 0.13) !important;
+}
+
+.summary-grid .card::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 5px;
+  background: var(--green);
+}
+
+.summary-grid .card:nth-child(2)::before {
+  background: var(--gold);
+}
+
+.summary-grid .card:nth-child(3)::before {
+  background: #5279ac;
+}
+
+.summary-grid h2 {
+  margin-bottom: 0.9rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.summary-grid strong {
+  color: var(--ink);
+  font-size: clamp(1.45rem, 2.5vw, 2rem) !important;
+  font-weight: 800;
+}
+
+main section.card h2.h4 {
+  margin-bottom: 1.3rem;
+  font-weight: 800;
+}
+
+main section.card h2.h4::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 23px;
+  margin-inline-end: 10px;
+  border-radius: 20px;
+  background: var(--green);
+  vertical-align: -5px;
+}
+
+.form-label {
+  color: #415766;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.form-control,
+.form-select {
+  min-height: 44px;
+  border: 1px solid #dbe6e3;
+  border-radius: 11px;
+  background-color: #fbfdfc;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px rgba(8, 127, 112, 0.12);
+}
+
+.btn {
+  border-radius: 10px;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  border-color: var(--green);
+  background: linear-gradient(110deg, var(--green), var(--green-dark));
+  box-shadow: 0 7px 16px rgba(8, 127, 112, 0.18);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  border-color: var(--green-dark);
+  background: var(--green-dark);
+}
+
+.table-responsive {
+  border: 1px solid #e8efec;
+  border-radius: 13px;
+}
+
+.table {
+  margin-bottom: 0;
+  --bs-table-striped-bg: #f5faf8;
+}
+
+.table thead th {
+  padding: 1rem;
+  border-bottom: 1px solid #dce7e3;
+  color: #456056;
+  background: #edf6f2;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.table tbody td {
+  padding: 0.85rem 1rem;
+  vertical-align: middle;
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background: #eaf6f1;
+}
+
+.table td:last-child {
+  min-width: 225px;
+}
+
+.table td .btn {
+  margin-block: 0.15rem;
+}
+
+#expenseRows small {
+  line-height: 1.6;
+}
+
+/* بطاقة حصالة الزواج */
+main.container > section.card:last-of-type {
+  border: 1px solid #d8ece2;
+  background:
+    radial-gradient(circle at 5% 0%, #ffedc8, transparent 27%),
+    linear-gradient(110deg, #ffffff, #eef9f3);
+}
+
+#savingsTotal {
+  display: inline-block;
+  margin-block: 0.3rem;
+  color: var(--green-dark);
+  font-size: 2rem !important;
+  font-weight: 800;
+}
+
+.modal-content {
+  border: 0;
+  border-radius: 18px;
+  box-shadow: 0 25px 70px rgba(12, 33, 40, 0.25);
+}
+
+.modal-header {
+  border-radius: 18px 18px 0 0;
+  background: #edf6f2;
+}
+
+#alertBox:empty {
+  display: none;
+}
+
+#alertBox .alert {
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 850px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  main.container {
+    padding-inline: 0.8rem;
+  }
+
+  main.container > .alert-warning {
+    padding: 1.4rem;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-grid .card {
+    min-height: 115px;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .table {
+    min-width: 720px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .summary-grid .card,
+  .table tbody tr {
+    transition: none;
+  }
+}

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متتبع المصاريف</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+      <span class="navbar-brand mb-0 h1">متتبع المصاريف 💰</span>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <div class="alert alert-warning text-center fw-bold">
+      لا تصرف يا محمود، أنت بدك تتزوج 💍
+    </div>
+
+    <div id="alertBox"></div>
+
+    <div id="loading" class="text-center d-none my-3">
+      <div class="spinner-border text-primary" role="status"></div>
+      <span class="ms-2">جارٍ التحميل...</span>
+    </div>
+
+    <section class="summary-grid mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h6">إجمالي المصاريف</h2>
+          <strong id="totalAmount" class="fs-3">0 د.أ</strong>
+        </div>
+      </div>
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h6">عدد المصاريف</h2>
+          <strong id="expensesCount" class="fs-3">0</strong>
+        </div>
+      </div>
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h6">أعلى مصروف</h2>
+          <strong id="highestExpense" class="fs-3">0 د.أ</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h2 class="h4 mb-3">أضف مصروفًا</h2>
+
+        <form id="addForm" class="row g-3">
+          <div class="col-md-6">
+            <label for="addTitle" class="form-label">اسم المصروف</label>
+            <input id="addTitle" class="form-control" maxlength="100" required>
+          </div>
+          <div class="col-md-3">
+            <label for="addAmount" class="form-label">المبلغ بالدينار</label>
+            <input id="addAmount" type="number" class="form-control"
+                   min="0.01" step="0.01" required>
+          </div>
+          <div class="col-md-3">
+            <label for="addDate" class="form-label">التاريخ</label>
+            <input id="addDate" type="date" class="form-control" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="addCategory" class="form-label">التصنيف</label>
+            <select id="addCategory" class="form-select" required>
+              <option value="">اختر التصنيف</option>
+              <option value="Food">طعام</option>
+              <option value="Transport">مواصلات</option>
+              <option value="Bills">فواتير</option>
+              <option value="Entertainment">ترفيه</option>
+              <option value="Other">أخرى</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="addNecessary" class="form-label">كان ضروري؟</label>
+            <select id="addNecessary" class="form-select">
+              <option value="">لم أحدد</option>
+              <option value="true">نعم</option>
+              <option value="false">لا</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="addWorthIt" class="form-label">كان يستاهل؟</label>
+            <select id="addWorthIt" class="form-select">
+              <option value="">لم أحدد</option>
+              <option value="true">نعم</option>
+              <option value="false">لا</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="addHappy" class="form-label">كنت سعيد؟</label>
+            <select id="addHappy" class="form-select">
+              <option value="">لم أحدد</option>
+              <option value="true">نعم</option>
+              <option value="false">لا</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">حفظ المصروف</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="card shadow-sm mb-4">
+      <div class="card-body">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+          <h2 class="h4 mb-0">المصاريف</h2>
+          <select id="categoryFilter" class="form-select w-auto" aria-label="تصفية المصاريف">
+            <option value="All">كل التصنيفات</option>
+            <option value="Food">طعام</option>
+            <option value="Transport">مواصلات</option>
+            <option value="Bills">فواتير</option>
+            <option value="Entertainment">ترفيه</option>
+            <option value="Other">أخرى</option>
+          </select>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-striped align-middle">
+            <thead>
+              <tr>
+                <th>المصروف</th>
+                <th>المبلغ</th>
+                <th>التصنيف</th>
+                <th>التاريخ</th>
+                <th>إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="expenseRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h2 class="h4">حصالة الزواج 💍</h2>
+        <p class="mb-1">المبلغ الذي أودعته فعلًا:</p>
+        <strong id="savingsTotal" class="fs-3">0 د.أ</strong>
+        <p class="text-muted mt-2 mb-0">
+          إذا صرفت 15 دينارًا أو أكثر، يظهر لك اقتراح أن تضع ضعفها في الحصالة.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="editForm">
+          <div class="modal-header">
+            <h2 class="modal-title fs-5">تعديل المصروف</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="إغلاق"></button>
+          </div>
+          <div class="modal-body">
+            <input id="editId" type="hidden">
+
+            <label for="editTitle" class="form-label">اسم المصروف</label>
+            <input id="editTitle" class="form-control mb-3" maxlength="100" required>
+
+            <label for="editAmount" class="form-label">المبلغ</label>
+            <input id="editAmount" type="number" min="0.01" step="0.01"
+                   class="form-control mb-3" required>
+
+            <label for="editCategory" class="form-label">التصنيف</label>
+            <select id="editCategory" class="form-select mb-3" required>
+              <option value="Food">طعام</option>
+              <option value="Transport">مواصلات</option>
+              <option value="Bills">فواتير</option>
+              <option value="Entertainment">ترفيه</option>
+              <option value="Other">أخرى</option>
+            </select>
+
+            <label for="editDate" class="form-label">التاريخ</label>
+            <input id="editDate" type="date" class="form-control mb-3" required>
+
+            <label for="editNecessary" class="form-label">كان ضروري؟</label>
+            <select id="editNecessary" class="form-select mb-3">
+              <option value="">لم أحدد</option>
+              <option value="true">نعم</option>
+              <option value="false">لا</option>
+            </select>
+
+            <label for="editWorthIt" class="form-label">كان يستاهل؟</label>
+            <select id="editWorthIt" class="form-select mb-3">
+              <option value="">لم أحدد</option>
+              <option value="true">نعم</option>
+              <option value="false">لا</option>
+            </select>
+
+            <label for="editHappy" class="form-label">كنت سعيد؟</label>
+            <select id="editHappy" class="form-select">
+              <option value="">لم أحدد</option>
+              <option value="true">نعم</option>
+              <option value="false">لا</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">إلغاء</button>
+            <button type="submit" class="btn btn-primary">حفظ التعديل</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
