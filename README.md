@@ -55,6 +55,9 @@ The `.env` file contains a local password and must not be included in the submit
 
 The hardest part was connecting the frontend, Express server, and PostgreSQL database. I also encountered a CORS error when the frontend requested data from the server. I checked the browser console and server output, verified that the server was running on port 3000, and corrected the database connection and CORS setup. After that, I tested that expenses could be loaded and saved.
 
+## GitHub Repository
+
+https://github.com/mtgharaibeh23/expense-tracker
 
 ## Demo Video
 
